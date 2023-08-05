@@ -16,8 +16,8 @@ jobs:
       - name: Install necessary libraries
         run: |
           # sudo -H pip install --root-user-action=ignore
-          pip install --upgrade pip
-          pip install -r requirements.txt
+          sudo -H pip install --upgrade pip
+          sudo -H pip install -r requirements.txt
 
       - name: Execute Python Script
         env:
