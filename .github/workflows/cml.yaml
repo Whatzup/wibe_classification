@@ -14,7 +14,8 @@ jobs:
            python-version: '3.x'
       - uses: iterative/setup-cml@v1
       - name: Train model
+        env:
+           repo_token: ${{secrets.GITHUB_TOKEN}}
         run:
-          sudo -H pip install python
           sudo -H pip install -r requirements.txt
           python train.py
