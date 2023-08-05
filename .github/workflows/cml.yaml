@@ -14,5 +14,5 @@ jobs:
         env:
            repo_token: ${{secrets.GITHUB_TOKEN}}
         run: |
-          python -m pip install -r requirements.txt
+          sudo -H python -m pip install -r requirements.txt
           python train.py
