@@ -1,18 +1,24 @@
 name: model_training
 on: [push]
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
-    container: ghcr.io/iterative/cml:0-dvc2-base1
     steps:
-      - uses: actions/checkout@v2
-      # - uses: actions/setup-python@v4
-      #   with:
-      #      python-version: '3.x'
-      # - uses: iterative/setup-cml@v1
-      - name: TrainModel
-        env:
-           repo_token: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Access the repo
+        uses: actions/checkout@v2
+
+      - name: Configure Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.7'
+
+      - name: Install necessary libraries
         run: |
-          sudo -H python -m pip install -r requirements.txt
-          python train.py
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Python Script
+        env:
+          URI: ${{ secrets.URI }}
+        run: python train.py
