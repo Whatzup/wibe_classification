@@ -1,0 +1,25 @@
+name: model_training
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/iterative/cml:0-dvc2-base1
+    steps:
+      - name: Access the repo
+        uses: actions/checkout@v2
+
+      - name: Configure Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install necessary libraries
+        run: |
+          # sudo -H pip install --root-user-action=ignore
+          sudo -H pip install --upgrade pip
+          sudo -H pip install -r requirements.txt
+
+      - name: Execute Python Script
+        env:
+          URI: ${{ secrets.URI }}
+        run: python train.py
