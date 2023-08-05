@@ -15,5 +15,6 @@ jobs:
       - uses: iterative/setup-cml@v1
       - name: Train model
         run:
+          sudo -H pip install python
           sudo -H pip install -r requirements.txt
           python train.py
